@@ -66,15 +66,15 @@ contract PrivateOffering is ContextUpgradeable, ReentrancyGuardUpgradeable, Gove
         token.transfer(to, balance);
     }
 
-    function deposit50(string calldata token, uint32 amount) public {
+    function deposit50(string calldata token, uint32 amount) external {
         _deposit(token, amount, 50);
     }
 
-    function deposit25(string calldata token, uint32 amount) public {
+    function deposit25(string calldata token, uint32 amount) external {
         _deposit(token, amount, 25);
     }
 
-    function deposit100(string calldata token, uint32 amount) public {
+    function deposit100(string calldata token, uint32 amount) external {
         _deposit(token, amount, 100);
     }
 
@@ -86,12 +86,12 @@ contract PrivateOffering is ContextUpgradeable, ReentrancyGuardUpgradeable, Gove
         return _deposits[_msgSender()].total;
     }
 
-    function _deposit(string calldata token, uint32 amount, uint32 percent) private {
+    function _deposit(string calldata symbol, uint32 amount, uint32 percent) private {
         require(amount > 0, "INVALID_AMOUNT");
 
         uint256 cost = (amount * _unitPrice * percent) / 100;
         require(
-            _payableToken[token].transferFrom(
+            _payableToken[symbol].transferFrom(
                 _msgSender(),
                 address(this),
                 cost
@@ -103,8 +103,7 @@ contract PrivateOffering is ContextUpgradeable, ReentrancyGuardUpgradeable, Gove
             _deposits[_msgSender()].amount += amount;    
             _deposits[_msgSender()].total += cost;    
         } else {
-            _deposits[_msgSender()].amount = amount;
-            _deposits[_msgSender()].total = cost;
+            _deposits[_msgSender()] = DepositData(true, amount, cost);
         }
     }
 }
