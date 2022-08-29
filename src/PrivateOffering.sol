@@ -19,6 +19,7 @@ contract PrivateOffering is ContextUpgradeable, ReentrancyGuardUpgradeable, Gove
     mapping(string => IERC20) private _payableToken;
 
     uint256 private _unitPrice;
+    bool private _isPaused;
 
     /**
      * @dev Initialization
@@ -28,6 +29,20 @@ contract PrivateOffering is ContextUpgradeable, ReentrancyGuardUpgradeable, Gove
         __ReentrancyGuard_init();        
 
         _unitPrice = price;
+        _isPaused = false;
+    }
+
+    modifier onlyUnpaused() {
+        require(_isPaused == false, "PAUSED");
+        _;
+    }
+
+    function pause () external onlyGovernor {
+        _isPaused = true;
+    }
+
+    function resume () external onlyGovernor {
+        _isPaused = false;
     }
 
     function getUnitPrice () public view returns(uint256) {
@@ -66,15 +81,15 @@ contract PrivateOffering is ContextUpgradeable, ReentrancyGuardUpgradeable, Gove
         token.transfer(to, balance);
     }
 
-    function deposit50(string calldata token, uint32 amount) external {
+    function deposit50(string calldata token, uint32 amount) external onlyUnpaused {
         _deposit(token, amount, 50);
     }
 
-    function deposit25(string calldata token, uint32 amount) external {
+    function deposit25(string calldata token, uint32 amount) external onlyUnpaused {
         _deposit(token, amount, 25);
     }
 
-    function deposit100(string calldata token, uint32 amount) external {
+    function deposit100(string calldata token, uint32 amount) external onlyUnpaused {
         _deposit(token, amount, 100);
     }
 

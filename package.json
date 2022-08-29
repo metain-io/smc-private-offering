@@ -11,8 +11,10 @@
     "compile": "gulp flatten && hardhat compile",
     "test": "gulp flatten && hardhat compile && hardhat test --network dev",
     "deploy:dev": "hardhat deploy --verbose --network dev",
-    "deploy:testnet": "hardhat deploy --verbose --network testnet --show-stack-traces",
-    "deploy:mainnet": "hardhat deploy --verbose --network mainnet"    
+    "deploy:avaxTest": "hardhat deploy --verbose --network avaxTest --show-stack-traces",
+    "deploy:bscTest": "hardhat deploy --verbose --network bscTest --show-stack-traces",
+    "deploy:avax": "hardhat deploy --verbose --network avax",
+    "deploy:bsc": "hardhat deploy --verbose --network bsc"        
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.6.0",
