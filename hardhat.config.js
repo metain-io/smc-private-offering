@@ -2,6 +2,8 @@ require("@openzeppelin/hardhat-upgrades");
 
 const fs = require("fs");
 
+const interact = require("./tools/interact");
+
 const argv = require("minimist")(process.argv.slice(2));
 const env = require("./env.json")[argv.network];
 
@@ -9,6 +11,8 @@ const secret = JSON.parse(fs.readFileSync(".secret"));
 for (let key in secret) {
   secret[key] = Array.isArray(secret[key]) ? secret[key] : [secret[key]];
 }
+
+task("interact", "Interact with REIT NFT Contract").setAction(interact);
 
 /**
  * Contract deployment task
