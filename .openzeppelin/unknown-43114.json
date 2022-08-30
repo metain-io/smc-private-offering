@@ -1,0 +1,192 @@
+{
+  "manifestVersion": "3.2",
+  "admin": {
+    "address": "0x9b98E204D7424e822e2f2615f5204C92dd833006",
+    "txHash": "0xdb4b201154b616b0f47746e441bc72c0efb3f86f8a924dafe16446fddf99a65a"
+  },
+  "proxies": [
+    {
+      "address": "0x61fe48d85DD7a7D87b482cED5aF89Beb8B77c16b",
+      "txHash": "0x45828f555dbba839e303195aea25af500da04306c7c84e18cae381b5cde06a7f",
+      "kind": "transparent"
+    }
+  ],
+  "impls": {
+    "fcb4d46e8c02535eccfaa2f059c6a9a7d3d42469d5b05a49ed0056233187a1a2": {
+      "address": "0x385e503876EdC8331944F3b8E091CFa55e82750c",
+      "txHash": "0x42ecbea889080e2782734a0da7c69fc959d7fa9b75fb777b7d1b1ca0cfb403eb",
+      "layout": {
+        "storage": [
+          {
+            "label": "_initialized",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_uint8",
+            "contract": "Initializable",
+            "src": "contracts\\PrivateOffering.sol:334",
+            "retypedFrom": "bool"
+          },
+          {
+            "label": "_initializing",
+            "offset": 1,
+            "slot": "0",
+            "type": "t_bool",
+            "contract": "Initializable",
+            "src": "contracts\\PrivateOffering.sol:339"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "ContextUpgradeable",
+            "src": "contracts\\PrivateOffering.sol:526"
+          },
+          {
+            "label": "_status",
+            "offset": 0,
+            "slot": "51",
+            "type": "t_uint256",
+            "contract": "ReentrancyGuardUpgradeable",
+            "src": "contracts\\PrivateOffering.sol:456"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "52",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "ReentrancyGuardUpgradeable",
+            "src": "contracts\\PrivateOffering.sol:492"
+          },
+          {
+            "label": "_governor",
+            "offset": 0,
+            "slot": "101",
+            "type": "t_address",
+            "contract": "GovernableUpgradeable",
+            "src": "contracts\\PrivateOffering.sol:543"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "102",
+            "type": "t_array(t_uint256)49_storage",
+            "contract": "GovernableUpgradeable",
+            "src": "contracts\\PrivateOffering.sol:608"
+          },
+          {
+            "label": "_deposits",
+            "offset": 0,
+            "slot": "151",
+            "type": "t_mapping(t_address,t_struct(DepositData)687_storage)",
+            "contract": "PrivateOffering",
+            "src": "contracts\\PrivateOffering.sol:620"
+          },
+          {
+            "label": "_payableToken",
+            "offset": 0,
+            "slot": "152",
+            "type": "t_mapping(t_string_memory_ptr,t_contract(IERC20)77)",
+            "contract": "PrivateOffering",
+            "src": "contracts\\PrivateOffering.sol:621"
+          },
+          {
+            "label": "_unitPrice",
+            "offset": 0,
+            "slot": "153",
+            "type": "t_uint256",
+            "contract": "PrivateOffering",
+            "src": "contracts\\PrivateOffering.sol:623"
+          },
+          {
+            "label": "_isPaused",
+            "offset": 0,
+            "slot": "154",
+            "type": "t_bool",
+            "contract": "PrivateOffering",
+            "src": "contracts\\PrivateOffering.sol:624"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_array(t_uint256)49_storage": {
+            "label": "uint256[49]",
+            "numberOfBytes": "1568"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_contract(IERC20)77": {
+            "label": "contract IERC20",
+            "numberOfBytes": "20"
+          },
+          "t_mapping(t_address,t_struct(DepositData)687_storage)": {
+            "label": "mapping(address => struct PrivateOffering.DepositData)",
+            "numberOfBytes": "32"
+          },
+          "t_mapping(t_string_memory_ptr,t_contract(IERC20)77)": {
+            "label": "mapping(string => contract IERC20)",
+            "numberOfBytes": "32"
+          },
+          "t_string_memory_ptr": {
+            "label": "string",
+            "numberOfBytes": "32"
+          },
+          "t_struct(DepositData)687_storage": {
+            "label": "struct PrivateOffering.DepositData",
+            "members": [
+              {
+                "label": "initialized",
+                "type": "t_bool",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "amount",
+                "type": "t_uint32",
+                "offset": 1,
+                "slot": "0"
+              },
+              {
+                "label": "total",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "1"
+              },
+              {
+                "label": "fullPayment",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "2"
+              }
+            ],
+            "numberOfBytes": "96"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint32": {
+            "label": "uint32",
+            "numberOfBytes": "4"
+          },
+          "t_uint8": {
+            "label": "uint8",
+            "numberOfBytes": "1"
+          },
+          "t_string_storage": {
+            "label": "string"
+          }
+        }
+      }
+    }
+  }
+}
