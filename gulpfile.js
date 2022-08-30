@@ -47,6 +47,7 @@ async function flatten() {
   try { fs.mkdirSync("./contracts"); } catch (ex) {}
 
   await mergeSolidityContract(path.join(__dirname, './src/PrivateOffering.sol'), path.join(__dirname, './contracts/PrivateOffering.sol'));  
+  await mergeSolidityContract(path.join(__dirname, './src/USDMToken.sol'), path.join(__dirname, './contracts/USDMToken.sol'));  
 }
 
 exports.flatten = flatten;

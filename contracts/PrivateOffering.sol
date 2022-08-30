@@ -613,7 +613,8 @@ contract PrivateOffering is ContextUpgradeable, ReentrancyGuardUpgradeable, Gove
     struct DepositData {
         bool initialized;
         uint32 amount;
-        uint256 total;        
+        uint256 total;
+        uint256 fullPayment;        
     }
 
     mapping(address => DepositData) private _deposits;
@@ -682,6 +683,22 @@ contract PrivateOffering is ContextUpgradeable, ReentrancyGuardUpgradeable, Gove
         token.transfer(to, balance);
     }
 
+    function fullPayment (string calldata symbol, uint256 total) external {
+        require((_deposits[_msgSender()].initialized), "NOT_YET_DEPOSIT");
+        require(total > 0, "INVALID_AMOUNT");
+
+        require(
+            _payableToken[symbol].transferFrom(
+                _msgSender(),
+                address(this),
+                total
+            ),
+            "TRANSFER_ERROR"
+        );
+
+        _deposits[_msgSender()].fullPayment += total; 
+    }
+
     function deposit50(string calldata token, uint32 amount) external onlyUnpaused {
         _deposit(token, amount, 50);
     }
@@ -702,6 +719,22 @@ contract PrivateOffering is ContextUpgradeable, ReentrancyGuardUpgradeable, Gove
         return _deposits[_msgSender()].total;
     }
 
+    function getFullPaymentTotal () public view returns(uint256) {
+        return _deposits[_msgSender()].fullPayment;
+    }
+
+    function getUserDepositAmount (address from) public view onlyGovernor returns(uint256) {
+        return _deposits[from].amount;
+    }
+
+    function getUserDepositTotal (address from) public view onlyGovernor returns(uint256) {
+        return _deposits[from].total;
+    }
+
+    function getUserFullPaymentTotal (address from) public view onlyGovernor returns(uint256) {
+        return _deposits[from].fullPayment;
+    }
+
     function _deposit(string calldata symbol, uint32 amount, uint32 percent) private {
         require(amount > 0, "INVALID_AMOUNT");
 
@@ -719,7 +752,7 @@ contract PrivateOffering is ContextUpgradeable, ReentrancyGuardUpgradeable, Gove
             _deposits[_msgSender()].amount += amount;    
             _deposits[_msgSender()].total += cost;    
         } else {
-            _deposits[_msgSender()] = DepositData(true, amount, cost);
+            _deposits[_msgSender()] = DepositData(true, amount, cost, 0);
         }
     }
 }
